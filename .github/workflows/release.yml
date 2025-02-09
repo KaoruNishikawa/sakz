@@ -7,10 +7,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Test
-        uses: ./.github/workflows/test.yml
+    uses: ./.github/workflows/test.yml
 
   release-to-crates-io:
     needs: test
@@ -27,7 +24,4 @@ jobs:
 
   release-to-pypi:
     needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Release to PyPI
-        uses: ./.github/workflows/release-python.yml
+    uses: ./.github/workflows/release-python.yml
