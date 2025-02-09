@@ -109,13 +109,28 @@ impl<'a> Figure<'a> {
         self
     }
 
-    pub fn add_subfigure(
-        mut self,
-        title: String,
-        dim: usize,
-        coordinate: CoordinateSystem,
-    ) -> Self {
-        let new_figure = Figure::new(title, dim, coordinate);
+    pub fn title(&mut self, title: &str) -> &mut Self {
+        self.title = title.to_string();
+        self
+    }
+
+    pub fn coordinate(&mut self, coordinate: CoordinateSystem) -> &mut Self {
+        self.coordinate = coordinate;
+        self
+    }
+
+    pub fn size(&mut self, width: f64, height: f64) -> &mut Self {
+        self.size = (width, height);
+        self
+    }
+
+    pub fn aspect(&mut self, aspect: f64) -> &mut Self {
+        self.aspect = Some(aspect);
+        self
+    }
+
+    pub fn add_subfigure(mut self, title: &str) -> Self {
+        let new_figure = Figure::new(title);
         self.subfigures.push(new_figure);
         self
     }
