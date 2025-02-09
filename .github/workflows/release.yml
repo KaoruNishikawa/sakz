@@ -1,0 +1,33 @@
+name: Release the package
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test
+        uses: ./.github/workflows/test.yml
+
+  release-to-crates-io:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log in to crates.io
+        run: cargo login ${{ secrets.CRATES_IO_TOKEN }}
+
+      - name: Build binaries in "release" mode
+        run: cargo build -r
+
+      - name: Publish to crates.io
+        run: cargo publish
+
+  release-to-pypi:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Release to PyPI
+        uses: ./.github/workflows/release-python.yml
