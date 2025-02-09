@@ -1,0 +1,30 @@
+[project]
+name = "sakz"
+version = "0.1.0"
+description = "Fast and simple plotting library."
+readme = "README.md"
+license = "MIT OR Apache-2.0"
+requires-python = ">=3.8"
+dependencies = ["cffi>=1.17.1"]
+
+[project.urls]
+Repository = "https://github.com/KaoruNishikawa/sakz"
+
+[project.scripts]
+
+[dependency-groups]
+dev = []
+
+[build-system]
+requires = ["maturin>=1.0,<2.0"]
+build-backend = "maturin"
+
+[tool.maturin]
+bindings = "cffi"
+python-source = "python"
+module-name = "sakz._sakz"
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+extend-exclude = ["python/sakz/_sakz"]

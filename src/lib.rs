@@ -1,4 +1,5 @@
-pub mod figure;
+mod extern_api;
+mod figure;
 mod plotters;
 mod reducer;
 mod saver;
