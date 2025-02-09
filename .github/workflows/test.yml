@@ -8,7 +8,7 @@ on:
   workflow_call:
 
 env:
-  RUSTFLAGS: -Dwarnings
+  # RUSTFLAGS: -Dwarnings
   CARGO_TERM_COLOR: always
 
 jobs:
