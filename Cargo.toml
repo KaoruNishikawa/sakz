@@ -1,11 +1,15 @@
 [package]
 name = "sakz"
 version = "0.1.0"
+description = "Fast and simple plotting library."
+readme = "README.md"
 edition = "2021"
 license = "MIT OR Apache-2.0"
+repository = "https://github.com/KaoruNishikawa/sakz"
 
 [dependencies]
 image = "0.25.5"
+libc = "0.2.169"
 rand = "0.8.5"
 resvg = "0.44.0"
 svg = "0.18.0"

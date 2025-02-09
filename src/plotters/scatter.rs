@@ -44,10 +44,6 @@ impl Plot for Scatter {
     fn render(&self, figsize: (f64, f64), aspect: Option<f64>) -> Group {
         let (scale, shift) = utils::get_scale_factors(figsize, self.bbox(), aspect);
 
-        println!("Scale = {:?}", scale);
-        println!("Shift = {:?}", shift);
-        println!("Data = {:?}", self.data);
-
         let mut scatter_plot = Group::new();
         // TODO: Implement reducer from 3D to 2D
         for (x, y, _) in &self.data {
@@ -100,8 +96,8 @@ impl Plot for Scatter {
         let margin = 0.1;
         let mut dx = (max_x - min_x) * margin;
         let mut dy = (max_y - min_y) * margin;
-        dx = if dx.is_finite() { dx } else { 1.0 };
-        dy = if dy.is_finite() { dy } else { 1.0 };
+        dx = if dx.is_finite() && dx != 0.0 { dx } else { 1.0 };
+        dy = if dy.is_finite() && dy != 0.0 { dy } else { 1.0 };
 
         (min_x - dx, max_x + dx, min_y - dy, max_y + dy)
     }

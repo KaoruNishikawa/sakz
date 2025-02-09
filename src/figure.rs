@@ -20,7 +20,6 @@ pub enum CoordinateSystem {
 pub struct Figure<'a> {
     pub title: String,
     pub coordinate: CoordinateSystem,
-    pub dim: usize,
     pub size: (f64, f64),
     pub aspect: Option<f64>,
     pub subfigures: Vec<Figure<'a>>,
@@ -33,7 +32,6 @@ impl Default for Figure<'_> {
         Self {
             title: "Figure".to_string(),
             coordinate: CoordinateSystem::Cartesian,
-            dim: 2,
             size: (800.0, 600.0),
             aspect: None,
             subfigures: Vec::new(),
@@ -44,16 +42,10 @@ impl Default for Figure<'_> {
 }
 
 impl<'a> Figure<'a> {
-    pub fn new(title: String, dim: usize, coordinate: CoordinateSystem) -> Self {
-        if dim != 2 && dim != 3 {
-            panic!("Only 2D and 3D plots are supported.");
-        }
-
+    pub fn new(title: &str) -> Self {
         let default = Self::default();
         Self {
-            title,
-            coordinate,
-            dim,
+            title: title.to_string(),
             ..default
         }
     }
@@ -105,7 +97,7 @@ impl<'a> Figure<'a> {
             let mut idx = -1;
             image_data.retain(|_| {
                 idx += 1;
-                return idx % 4 != 3;
+                idx % 4 != 3
             })
         }
 
@@ -117,13 +109,28 @@ impl<'a> Figure<'a> {
         self
     }
 
-    pub fn add_subfigure(
-        mut self,
-        title: String,
-        dim: usize,
-        coordinate: CoordinateSystem,
-    ) -> Self {
-        let new_figure = Figure::new(title, dim, coordinate);
+    pub fn title(&mut self, title: &str) -> &mut Self {
+        self.title = title.to_string();
+        self
+    }
+
+    pub fn coordinate(&mut self, coordinate: CoordinateSystem) -> &mut Self {
+        self.coordinate = coordinate;
+        self
+    }
+
+    pub fn size(&mut self, width: f64, height: f64) -> &mut Self {
+        self.size = (width, height);
+        self
+    }
+
+    pub fn aspect(&mut self, aspect: f64) -> &mut Self {
+        self.aspect = Some(aspect);
+        self
+    }
+
+    pub fn add_subfigure(mut self, title: &str) -> Self {
+        let new_figure = Figure::new(title);
         self.subfigures.push(new_figure);
         self
     }
