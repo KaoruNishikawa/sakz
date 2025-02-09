@@ -13,6 +13,8 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
       - name: Log in to crates.io
         run: cargo login ${{ secrets.CRATES_IO_TOKEN }}
 
