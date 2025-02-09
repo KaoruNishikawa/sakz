@@ -105,7 +105,7 @@ impl<'a> Figure<'a> {
             let mut idx = -1;
             image_data.retain(|_| {
                 idx += 1;
-                return idx % 4 != 3;
+                idx % 4 != 3
             })
         }
 

@@ -16,9 +16,9 @@ pub fn get_scale_factors(
 
     if let Some(aspect) = aspect {
         if scale_x < scale_y {
-            scale_x = scale_x * aspect;
+            scale_x *= aspect;
         } else {
-            scale_y = scale_y / aspect;
+            scale_y /= aspect;
         }
     };
 
