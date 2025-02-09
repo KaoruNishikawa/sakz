@@ -20,7 +20,6 @@ pub enum CoordinateSystem {
 pub struct Figure<'a> {
     pub title: String,
     pub coordinate: CoordinateSystem,
-    pub dim: usize,
     pub size: (f64, f64),
     pub aspect: Option<f64>,
     pub subfigures: Vec<Figure<'a>>,
@@ -33,7 +32,6 @@ impl Default for Figure<'_> {
         Self {
             title: "Figure".to_string(),
             coordinate: CoordinateSystem::Cartesian,
-            dim: 2,
             size: (800.0, 600.0),
             aspect: None,
             subfigures: Vec::new(),
@@ -44,16 +42,10 @@ impl Default for Figure<'_> {
 }
 
 impl<'a> Figure<'a> {
-    pub fn new(title: String, dim: usize, coordinate: CoordinateSystem) -> Self {
-        if dim != 2 && dim != 3 {
-            panic!("Only 2D and 3D plots are supported.");
-        }
-
+    pub fn new(title: &str) -> Self {
         let default = Self::default();
         Self {
-            title,
-            coordinate,
-            dim,
+            title: title.to_string(),
             ..default
         }
     }
