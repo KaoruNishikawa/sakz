@@ -10,7 +10,7 @@ repository = "https://github.com/KaoruNishikawa/sakz"
 [dependencies]
 image = "0.25.5"
 libc = "0.2.169"
-rand = "0.8.5"
+rand = "0.8.6"
 resvg = "0.44.0"
 svg = "0.18.0"
 svg2pdf = "0.12.0"
